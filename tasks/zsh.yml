@@ -1,0 +1,15 @@
+- name: Install zsh
+  apt:
+    name: zsh
+    state: present
+
+- name: Change {{ username }}'s shell to zsh
+  user:
+    name: "{{ username }}"
+    shell: /usr/bin/zsh
+
+- name: Create SymLink for .zshrc
+  file:
+    src: /home/{{ username }}/git/dotfiles/zsh/zshrc
+    dest: /home/{{ username }}/.zshrc
+    state: link

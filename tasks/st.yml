@@ -1,0 +1,80 @@
+- name: Check to see if st is installed
+  stat:
+    path: /usr/local/bin/st
+  register: app
+- name: Download and extract st
+  unarchive:
+    src: https://dl.suckless.org/st/st-{{ st['version'] }}.tar.gz
+    dest: /tmp/
+    remote_src: yes
+  when: app.stat.exists == false
+
+- name: Copy st config file
+  template:
+    src: templates/st.config.h.j2
+    dest: /tmp/st-{{ st['version'] }}/config.h
+  when: app.stat.exists == false
+
+- name: Download st patch - {{ patch }}
+  get_url:
+    url: https://raw.githubusercontent.com/soleblaze/dotfiles/master/st/{{ patch }}.diff
+    dest: /tmp/st-{{ st['version'] }}/{{ patch }}.diff
+  vars:
+    patch: st-anysize-0.8.1
+  when: app.stat.exists == false
+
+- name: Download st patch - {{ patch }}
+  get_url:
+    url: https://raw.githubusercontent.com/soleblaze/dotfiles/master/st/{{ patch }}.diff
+    dest: /tmp/st-{{ st['version'] }}/{{ patch }}.diff
+  vars:
+    patch: st-bold-is-not-bright-20190127-3be4cf1
+  when: app.stat.exists == false
+
+- name: Download st patch - {{ patch }}
+  get_url:
+    url: https://raw.githubusercontent.com/soleblaze/dotfiles/master/st/{{ patch }}.diff
+    dest: /tmp/st-{{ st['version'] }}/{{ patch }}.diff
+  vars:
+    patch: st-boxdraw-20190202-3be4cf1
+  when: app.stat.exists == false
+
+- name: Install packages needed to compile st
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - build-essential
+      - libxft-dev
+      - libx11-dev
+  when: app.stat.exists == false
+
+- name: Compile and install st
+  make:
+    chdir: /tmp/st-{{ st['version'] }}
+    target: install
+  when: app.stat.exists == false
+
+- name: Download DejaVu Sans Mono Nerd Font
+  get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
+    dest: /usr/local/share/fonts/DejaVu Sans Mono Nerd Font Complete Mono.ttf
+  register: font
+
+- name: Refresh font cache
+  command: fc-cache
+  when: font.changed
+
+- name: Copy terminal icon
+  get_url:
+    url: http://icons.iconarchive.com/icons/kxmylo/simple/512/utilities-terminal-icon.png
+    dest: /usr/share/icons/hicolor/48x48/apps/term-icon.png
+
+- name: Copy st desktop file
+  copy:
+    src: files/debian-st.desktop
+    dest: /usr/share/applications/debian-st.desktop
+    owner: root
+    group: root
+

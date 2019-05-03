@@ -1,0 +1,29 @@
+- name: Install programming languages/tools
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - clang
+    - golang
+    - nodejs
+    - npm
+    - python-dev
+    - python-pip
+    - python3-dev
+    - python3-pip
+
+- name: Install generic tools
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - jq
+    - silversearcher-ag
+    - strace
+
+- name: Install communication tools
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - weechat

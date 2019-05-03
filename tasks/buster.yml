@@ -1,0 +1,12 @@
+- name: Update crostini from stretch to buster
+  replace:
+    dest: /etc/apt/sources.list
+    regexp: 'stretch'
+    replace: 'buster'
+  register: buster
+
+- name: Update all packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+  when: buster.changed

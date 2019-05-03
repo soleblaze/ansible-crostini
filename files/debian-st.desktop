@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Simple Terminal
+GenericName=Terminal
+Comment=Terminal Emulator
+Exec=st
+Type=Application
+Keywords=Terminal
+Icon=term-icon
+Categories=Utility;Terminal;
+StartupNotify=false

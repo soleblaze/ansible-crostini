@@ -1,0 +1,32 @@
+- name: Install tmux
+  apt:
+    name: tmux
+    state: present
+
+- name: Create symlink to tmux config
+  file:
+    src: /home/{{ username }}/git/dotfiles/tmux/tmux.conf
+    dest: /home/{{ username }}/.tmux.conf
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: link
+
+- name: Create tmux plugins directory
+  file:
+    path: /home/{{ username }}/.tmux/plugins
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: directory
+
+- name: Clone tpm
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: /home/{{ username }}/.tmux/plugins/tpm
+    update: no
+  become_user: "{{ username }}"
+  register: tpm
+
+- name: Install TPM modules
+  command: /home/{{ username }}/.tmux/plugins/tpm/bin/install_plugins
+  become_user: "{{ username }}"
+  when: tpm.changed

@@ -1,0 +1,14 @@
+- hosts: localhost
+  become: true
+
+  tasks:
+   - include_vars:
+       dir: vars
+   - include: tasks/base.yml
+   - include: tasks/buster.yml
+   - include: tasks/git.yml
+   - include: tasks/st.yml
+   - include: tasks/zsh.yml
+   - include: tasks/neovim.yml
+   - include: tasks/tmux.yml
+   - include: tasks/packages.yml
