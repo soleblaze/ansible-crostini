@@ -12,4 +12,13 @@
   file:
     src: /home/{{ username }}/git/dotfiles/zsh/zshrc
     dest: /home/{{ username }}/.zshrc
+    owner: "{{ username }}"
+    group: "{{ username }}"
     state: link
+
+- name: Setup base zshrc_local file
+  copy:
+    src: files/zshrc_local
+    dest: /home/{{ username }}/.zshrc_local
+    owner: "{{ username }}"
+    group: "{{ username }}"

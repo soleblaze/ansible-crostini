@@ -1,0 +1,7 @@
+# Start ssh-agent if it's not already running
+[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
+
+# Start tmux if it's not already running
+  if [ -z "$TMUX" ] && [ -e "$HOME/.tmux.conf" ]; then
+    tmux new-session -A -t main
+  fi
