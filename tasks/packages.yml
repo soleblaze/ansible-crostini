@@ -18,6 +18,7 @@
   vars:
     packages:
     - jq
+    - git-crypt
     - silversearcher-ag
     - strace
 
