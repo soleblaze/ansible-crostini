@@ -27,3 +27,8 @@
   vars:
     packages:
     - weechat
+
+- name: Install snapd
+  apt:
+    name: snapd
+    state: present
