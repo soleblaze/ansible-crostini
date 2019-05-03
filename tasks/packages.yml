@@ -19,5 +19,6 @@
     packages:
     - jq
     - git-crypt
+    - libnotify-bin
     - silversearcher-ag
     - strace
