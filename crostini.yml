@@ -12,3 +12,4 @@
    - include: tasks/neovim.yml
    - include: tasks/tmux.yml
    - include: tasks/packages.yml
+   - include: tasks/vscode.yml
