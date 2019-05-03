@@ -13,3 +13,4 @@
    - include: tasks/tmux.yml
    - include: tasks/packages.yml
    - include: tasks/vscode.yml
+   - include: tasks/weechat.yml
