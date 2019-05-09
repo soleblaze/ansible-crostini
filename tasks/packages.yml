@@ -23,3 +23,8 @@
     - silversearcher-ag
     - strace
     - xsel
+
+- name: Install zeal
+  apt:
+    name: zeal
+    state: present
