@@ -1,0 +1,9 @@
+- hosts: localhost
+  become: true
+
+  tasks:
+   - include_vars:
+       dir: vars
+   - include: tasks/buster.yml
+   - include: tasks/packages.yml
+   - include: tasks/vscode.yml

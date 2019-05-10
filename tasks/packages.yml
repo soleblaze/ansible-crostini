@@ -1,28 +1,16 @@
-- name: Install programming languages/tools
+- name: Install golang
   apt:
     name: "{{ packages }}"
   vars:
     packages:
-    - clang
     - golang
-    - nodejs
-    - npm
-    - python-dev
-    - python-pip
-    - python3-dev
-    - python3-pip
 
-- name: Install generic tools
+- name: Install libnotify
   apt:
     name: "{{ packages }}"
   vars:
     packages:
-    - jq
-    - git-crypt
     - libnotify-bin
-    - silversearcher-ag
-    - strace
-    - xsel
 
 - name: Install zeal
   apt:
