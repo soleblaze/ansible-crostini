@@ -1,0 +1,7 @@
+- hosts: localhost
+  become: true
+
+  tasks:
+   - include_vars:
+       dir: vars
+   - include: tasks/docker.yml

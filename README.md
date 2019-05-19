@@ -3,6 +3,18 @@
 This repo contains ansible scripts that can be used to install/configure 
 various tools in crostini.
 
+## docker
+
+This module will setup the docker repo and install docker. You will want to put your username in vars/user.yml so that the module can give your user permission to run docker commands.
+
+### How to run
+
+```
+apt-get update
+apt-get install -y ansible
+ansible-playbook docker.yml
+```
+
 
 ## simple terminal
 
