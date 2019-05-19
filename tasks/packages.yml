@@ -28,3 +28,8 @@
   apt:
     name: zeal
     state: present
+
+- name: Install cros-gpu-alpha
+  apt:
+    name: cros-gpu-alpha
+    state: present
