@@ -1,0 +1,13 @@
+- name: Install golang
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - golang
+
+- name: Install go dep
+  become: "{{ username }}"
+  shell: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  args:
+    warn: no
+    creates: /home/{{ username }}/go/bin/dep
