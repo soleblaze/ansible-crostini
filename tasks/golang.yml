@@ -5,6 +5,15 @@
     packages:
     - golang
 
+- name: Create go bin directory
+  become: "{{ username }}"
+  file:
+    path: /home/{{ username }}/go/bin
+    state: directory
+    mode: '0750'
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
 - name: Install go dep
   become: "{{ username }}"
   shell: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
