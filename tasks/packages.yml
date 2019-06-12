@@ -3,7 +3,6 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - clang
     - golang
     - nodejs
     - npm
