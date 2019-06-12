@@ -1,0 +1,8 @@
+- name: Install snapd and requirements
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - fuse
+    - squashfuse
+    - snapd
