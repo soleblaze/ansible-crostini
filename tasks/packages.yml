@@ -17,6 +17,7 @@
     name: "{{ packages }}"
   vars:
     packages:
+    - apt-file
     - jq
     - git-crypt
     - libnotify-bin
