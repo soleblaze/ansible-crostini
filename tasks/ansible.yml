@@ -1,0 +1,13 @@
+- name: Add Ansible repo key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 93C4A3FD7BB9C367
+
+- name: Add Ansible repo
+  apt_repository:
+    repo: deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
+
+- name: Upgrade Ansible
+  apt:
+    name: ansible
+    state: latest
