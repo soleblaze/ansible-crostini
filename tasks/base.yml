@@ -3,6 +3,11 @@
     name: python-apt
     state: present
 
+- name: Install aptitude
+  apt:
+    name: aptitude
+    state: present
+
 - name: Install unattended-upgrades
   apt:
     name: unattended-upgrades
