@@ -17,8 +17,8 @@
     - docker-ce-cli
     - containerd.io
 
-- name: Add {{ username }} to docker group
+- name: Add {{ lookup('env','USER') }} to docker group
   user:
-    name: "{{ username }}"
+    name: "{{ lookup('env','USER') }}"
     groups: docker
     append: yes

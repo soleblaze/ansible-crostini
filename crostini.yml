@@ -16,4 +16,5 @@
    - include: tasks/vscode.yml
    - include: tasks/golang.yml
    - include: tasks/snapd.yml
+   - include: tasks/lxd.yml
    - include: tasks/weechat.yml

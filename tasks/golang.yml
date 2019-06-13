@@ -6,17 +6,17 @@
     - golang
 
 - name: Create go bin directory
-  become: "{{ username }}"
+  become: "{{ lookup('env','USER') }}"
   file:
-    path: /home/{{ username }}/go/bin
+    path: /home/{{ lookup('env','USER') }}/go/bin
     state: directory
     mode: '0750'
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
 
 - name: Install go dep
-  become: "{{ username }}"
+  become: "{{ lookup('env','USER') }}"
   shell: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   args:
     warn: no
-    creates: /home/{{ username }}/go/bin/dep
+    creates: /home/{{ lookup('env','USER') }}/go/bin/dep

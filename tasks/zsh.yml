@@ -3,22 +3,22 @@
     name: zsh
     state: present
 
-- name: Change {{ username }}'s shell to zsh
+- name: Change {{ lookup('env','USER') }}'s shell to zsh
   user:
-    name: "{{ username }}"
+    name: "{{ lookup('env','USER') }}"
     shell: /usr/bin/zsh
 
 - name: Create SymLink for .zshrc
   file:
-    src: /home/{{ username }}/git/dotfiles/zsh/zshrc
-    dest: /home/{{ username }}/.zshrc
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    src: /home/{{ lookup('env','USER') }}/git/dotfiles/zsh/zshrc
+    dest: /home/{{ lookup('env','USER') }}/.zshrc
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
     state: link
 
 - name: Setup base zshrc_local file
   copy:
     src: files/zshrc_local
-    dest: /home/{{ username }}/.zshrc_local
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    dest: /home/{{ lookup('env','USER') }}/.zshrc_local
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"

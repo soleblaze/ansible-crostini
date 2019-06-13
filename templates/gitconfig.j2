@@ -44,4 +44,4 @@
 [mergetool]
   prompt = false
 [init]
-  templatedir = /home/{{ username }}/git/dotfiles/git-hooks
+  templatedir = /home/{{ lookup('env','USER') }}/git/dotfiles/git-hooks

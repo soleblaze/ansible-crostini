@@ -18,6 +18,7 @@
     packages:
     - apt-file
     - jq
+    - gawk
     - git-crypt
     - libnotify-bin
     - silversearcher-ag

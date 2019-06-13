@@ -1,41 +1,41 @@
 - name: Setup gitconfig file
   template:
     src: templates/gitconfig.j2
-    dest: /home/{{ username }}/.gitconfig
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    dest: /home/{{ lookup('env','USER') }}/.gitconfig
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
 
 - name: Create git directory
   file:
-    path: /home/{{ username }}/git
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    path: /home/{{ lookup('env','USER') }}/git
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
     state: directory
 
 - name: Clone dotfiles
   git:
     repo: git@github.com:soleblaze/dotfiles.git
-    dest: /home/{{ username }}/git/dotfiles
+    dest: /home/{{ lookup('env','USER') }}/git/dotfiles
     update: no
-  become_user: "{{ username }}"
+  become_user: "{{ lookup('env','USER') }}"
 
 - name: Clone scripts
   git:
     repo: git@github.com:soleblaze/scripts.git
-    dest: /home/{{ username }}/git/scripts
+    dest: /home/{{ lookup('env','USER') }}/git/scripts
     update: no
-  become_user: "{{ username }}"
+  become_user: "{{ lookup('env','USER') }}"
 
 - name: Clone dotfiles-private
   git:
     repo: git@bitbucket.org:soleblaze/dotfiles-private.git
-    dest: /home/{{ username }}/git/dotfiles-private
+    dest: /home/{{ lookup('env','USER') }}/git/dotfiles-private
     update: no
-  become_user: "{{ username }}"
+  become_user: "{{ lookup('env','USER') }}"
 
 - name: Clone dotfiles-encrypted
   git:
     repo: git@bitbucket.org:soleblaze/dotfiles-encrypted.git
-    dest: /home/{{ username }}/git/dotfiles-encrypted
+    dest: /home/{{ lookup('env','USER') }}/git/dotfiles-encrypted
     update: no
-  become_user: "{{ username }}"
+  become_user: "{{ lookup('env','USER') }}"

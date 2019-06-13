@@ -20,9 +20,9 @@
 
 - name: Create neovim directories
   file:
-    path: /home/{{ username }}/.config/nvim/{{ item }}
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    path: /home/{{ lookup('env','USER') }}/.config/nvim/{{ item }}
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
     state: directory
   with_items:
     - bundle
@@ -35,37 +35,37 @@
 - name: Install cobalt2 lightline theme
   get_url:
     url: https://raw.githubusercontent.com/soleblaze/dotfiles/master/nvim/autoload/lightline/colorscheme/cobalt2.vim
-    dest: /home/{{ username }}/.config/nvim/autoload/lightline/colorscheme/cobalt2.vim
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    dest: /home/{{ lookup('env','USER') }}/.config/nvim/autoload/lightline/colorscheme/cobalt2.vim
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
 
 - name: Create init.vim symlink
   file:
-    src: /home/{{ username }}/git/dotfiles/nvim/init.vim
-    dest: /home/{{ username }}/.config/nvim/init.vim
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    src: /home/{{ lookup('env','USER') }}/git/dotfiles/nvim/init.vim
+    dest: /home/{{ lookup('env','USER') }}/.config/nvim/init.vim
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
     state: link
 
 - name: Create UltiSnips symlink
   file:
-    src: /home/{{ username }}/git/dotfiles/nvim/UltiSnips
-    dest: /home/{{ username }}/.config/nvim/UltiSnips
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    src: /home/{{ lookup('env','USER') }}/git/dotfiles/nvim/UltiSnips
+    dest: /home/{{ lookup('env','USER') }}/.config/nvim/UltiSnips
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
     state: link
 
 - name: Download vim-plug
   get_url:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    dest: /home/{{ username }}/.config/nvim/autoload/plug.vim
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    dest: /home/{{ lookup('env','USER') }}/.config/nvim/autoload/plug.vim
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
   register: plug
 
 - name: Setup nvim
   command: nvim +PlugInstall +UpdateRemotePlugins +qa
-  become_user: "{{ username }}"
+  become_user: "{{ lookup('env','USER') }}"
   when: plug.changed
 
 
