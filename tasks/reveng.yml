@@ -1,0 +1,48 @@
+- name: Copy Binary Ninja logo to use as launch icon
+  copy:
+    src: /home/{{ lookup('env','USER') }}/bin/binaryninja/docs/img/logo.png
+    dest: /usr/share/icons/hicolor/256x256/apps/binaryninja.png
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy Binary Ninja desktop file
+  template:
+    src: templates/binaryninja.desktop.j2
+    dest: /usr/share/applications/binaryninja.desktop
+    owner: root
+    group: root
+
+- name: Clone radare2
+  git:
+    repo: https://github.com/radare/radare2.git
+    dest: /home/{{ lookup('env','USER') }}/git/radare2
+    update: no
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Install radare2
+  command: sys/user.sh
+  args:
+    chdir: /home/{{ lookup('env','USER') }}/git/radare2
+    creates: /home/{{ lookup('env','USER') }}/bin/radare2
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Install metasploit's repo key
+  apt_key:
+    data: "{{ lookup('file', 'files/metasploit.key') }}"
+    state: present
+
+- name: Setup metasploit's repo
+  apt_repository:
+    repo: deb [arch=amd64] http://downloads.metasploit.com/data/releases/metasploit-framework/apt sid main
+    state: present
+
+- name: Install metasploit
+  apt:
+    name: metasploit-framework
+    state: present
+
+- name: Install pwntools
+  pip:
+    name: pwntools
+    state: present
