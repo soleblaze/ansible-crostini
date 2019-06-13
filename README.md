@@ -17,7 +17,7 @@ ansible-playbook upgrade-ansible.yml
 
 ## docker
 
-This module will setup the docker repo and install docker. You will want to put your username in vars/user.yml so that the module can give your user permission to run docker commands.
+This module will setup the docker repo and install docker. 
 
 ### How to run
 
