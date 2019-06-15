@@ -1,3 +1,17 @@
+- name: Create bin directory
+  file:
+    path: /home/{{ lookup('env','USER') }}/bin
+    state: directory
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: '0700'
+
+- name: Extract Binary Ninja
+  unarchive:
+    src: "{{ binaryninja_zip }}"
+    dest: /home/{{ lookup('env','USER') }}/bin
+  become_user: "{{ lookup('env','USER') }}"
+
 - name: Copy Binary Ninja logo to use as launch icon
   copy:
     src: /home/{{ lookup('env','USER') }}/bin/binaryninja/docs/img/logo.png
