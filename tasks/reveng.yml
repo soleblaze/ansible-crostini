@@ -30,14 +30,14 @@
 - name: Clone radare2
   git:
     repo: https://github.com/radare/radare2.git
-    dest: /home/{{ lookup('env','USER') }}/git/radare2
+    dest: /home/{{ lookup('env','USER') }}/git/tools/radare2
     update: no
   become_user: "{{ lookup('env','USER') }}"
 
 - name: Install radare2
   command: sys/user.sh
   args:
-    chdir: /home/{{ lookup('env','USER') }}/git/radare2
+    chdir: /home/{{ lookup('env','USER') }}/git/tools/radare2
     creates: /home/{{ lookup('env','USER') }}/bin/radare2
   become_user: "{{ lookup('env','USER') }}"
 
@@ -133,3 +133,20 @@
   pip:
     name: pwntools
     state: present
+
+- name: Install gdb
+  apt:
+    name: gdb
+
+- name: Clone gef
+  git:
+    repo: https://github.com/hugsy/gef.git
+    dest: /home/{{ lookup('env','USER') }}/git/tools/gef
+    update: no
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Copy gdbinit
+  copy:
+    src: files/gdbinit
+    dest: /home/{{ lookup('env','USER') }}/.gdbinit
+  become_user: "{{ lookup('env','USER') }}"
