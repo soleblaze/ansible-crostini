@@ -8,10 +8,20 @@
     url: https://packages.microsoft.com/keys/microsoft.asc
     state: present
 
+# vscode.list is added by the vscode package. Since we don't want the repo
+# to be managed twice and we don't want to fight the package for control
+# we won't create/modify the sources.list.d file if it already exists.
+- name: Check if vscode source.d exists
+  stat:
+    path: /etc/apt/sources.list.d/vscode.list
+  register: vscode
+
 - name: Setup vscode repo
   apt_repository:
-    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    repo: deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
+    filename: vscode
     state: present
+  when: vscode.stat.exists == True
 
 - name: Install Visual Studio Code - Insiders
   apt:
