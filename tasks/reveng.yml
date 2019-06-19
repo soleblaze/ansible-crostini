@@ -41,6 +41,79 @@
     creates: /home/{{ lookup('env','USER') }}/bin/radare2
   become_user: "{{ lookup('env','USER') }}"
 
+- name: Clone Unicorn Engine
+  git:
+    repo: https://github.com/unicorn-engine/unicorn.git
+    dest: /home/{{ lookup('env','USER') }}/git/tools/unicorn
+    update: no
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Compile Unicorn Engine
+  command: ./make.sh
+  args:
+    chdir: /home/{{ lookup('env','USER') }}/git/tools/unicorn
+    creates: /usr/include/unicorn
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Install Unicorn Engine
+  command: ./make.sh install
+  args:
+    chdir: /home/{{ lookup('env','USER') }}/git/tools/unicorn
+    creates: /usr/include/unicorn
+
+- name: Clone Capstone Engine
+  git:
+    repo: https://github.com/aquynh/capstone.git
+    dest: /home/{{ lookup('env','USER') }}/git/tools/capstone
+    update: no
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Compile Capstone Engine
+  command: ./make.sh
+  args:
+    chdir: /home/{{ lookup('env','USER') }}/git/tools/capstone
+    creates: /usr/include/capstone
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Install Capstone Engine
+  command: ./make.sh install
+  args:
+    chdir: /home/{{ lookup('env','USER') }}/git/tools/capstone
+    creates: /usr/include/capstone
+
+- name: Install cmake
+  apt:
+    name: cmake
+
+- name: Clone Keystone Engine
+  git:
+    repo: https://github.com/keystone-engine/keystone.git
+    dest: /home/{{ lookup('env','USER') }}/git/tools/keystone
+    update: no
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Create Keystone build directory
+  file:
+    path: /home/{{ lookup('env','USER') }}/git/tools/keystone/build
+    state: directory
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: '0755'
+
+
+- name: Compile Keystone Engine
+  command: ../make-share.sh
+  args:
+    chdir: /home/{{ lookup('env','USER') }}/git/tools/keystone/build
+    creates: /usr/local/include/keystone
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Install Keystone Engine
+  command: make install
+  args:
+    chdir: /home/{{ lookup('env','USER') }}/git/tools/keystone/build
+    creates: /usr/local/include/keystone
+
 - name: Install metasploit's repo key
   apt_key:
     data: "{{ lookup('file', 'files/metasploit.key') }}"
