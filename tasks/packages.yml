@@ -17,10 +17,13 @@
   vars:
     packages:
     - apt-file
+    - dnsutils
     - jq
     - gawk
     - git-crypt
     - libnotify-bin
+    - netcat
+    - nmap
     - silversearcher-ag
     - strace
     - xsel
