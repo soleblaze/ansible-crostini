@@ -1,3 +1,5 @@
 source ~/git/tools/gef/gef.py
 source ~/git/tools/exploitable/exploitable/exploitable.py
 source ~/.local/lib/python3.7/site-packages/voltron/entry.py
+
+set disassembly-flavor intel
