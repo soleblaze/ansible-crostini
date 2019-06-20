@@ -145,6 +145,17 @@
     update: no
   become_user: "{{ lookup('env','USER') }}"
 
+- name: Install python modules for gef
+  pip:
+    executable: pip3
+    name: "{{ modules }}"
+  vars:
+    modules:
+    - keystone-engine
+    - unicorn
+    - capstone
+    - ropper
+
 - name: Clone exploitable
   git:
     repo: https://github.com/jfoote/exploitable.git
@@ -164,7 +175,6 @@
     dest: /home/{{ lookup('env','USER') }}/git/tools/voltron
     update: no
   become_user: "{{ lookup('env','USER') }}"
-
 
 - name: Install voltron
   command: ./install.sh
