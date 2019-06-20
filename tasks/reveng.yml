@@ -145,8 +145,30 @@
     update: no
   become_user: "{{ lookup('env','USER') }}"
 
+- name: Clone exploitable
+  git:
+    repo: https://github.com/jfoote/exploitable.git
+    dest: /home/{{ lookup('env','USER') }}/git/tools/exploitable
+    update: no
+  become_user: "{{ lookup('env','USER') }}"
+
 - name: Copy gdbinit
   copy:
     src: files/gdbinit
     dest: /home/{{ lookup('env','USER') }}/.gdbinit
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Clone voltron
+  git:
+    repo: https://github.com/snare/voltron.git
+    dest: /home/{{ lookup('env','USER') }}/git/tools/voltron
+    update: no
+  become_user: "{{ lookup('env','USER') }}"
+
+
+- name: Install voltron
+  command: ./install.sh
+  args:
+    chdir: /home/{{ lookup('env','USER') }}/git/tools/voltron
+    creates: /home/{{ lookup('env','USER') }}/.local/bin/voltron
   become_user: "{{ lookup('env','USER') }}"
