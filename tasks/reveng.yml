@@ -182,3 +182,7 @@
     chdir: /home/{{ lookup('env','USER') }}/git/tools/voltron
     creates: /home/{{ lookup('env','USER') }}/.local/bin/voltron
   become_user: "{{ lookup('env','USER') }}"
+
+- name: Install frida
+  pip:
+    name: frida-tools
