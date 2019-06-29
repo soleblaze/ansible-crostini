@@ -186,3 +186,18 @@
 - name: Install frida
   pip:
     name: frida-tools
+
+- name: Clone checksec
+  git:
+    repo: https://github.com/slimm609/checksec.sh.git
+    dest: /home/{{ lookup('env','USER') }}/git/tools/checksec
+    update: no
+  become_user: "{{ lookup('env','USER') }}"
+
+- name: Link checksec
+  file:
+    src: /home/{{ lookup('env','USER') }}/git/tools/checksec/checksec
+    dest: /home/{{ lookup('env','USER') }}/bin/checksec
+    state: link
+  become_user: "{{ lookup('env','USER') }}"
+
