@@ -7,7 +7,6 @@ verbatim, as it has a number of settings that are specific to me.
 
 To run:
 ```
-apt-get update
-apt-get install -y ansible
+curl https://github.com/soleblaze/ansible-crostini/raw/personal/initial.sh | bash
 ansible-playbook crostini.yml
 ```
