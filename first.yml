@@ -2,4 +2,5 @@
   become: true
 
   tasks:
+   - include: tasks/base.yml
    - include: tasks/ansible.yml

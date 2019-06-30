@@ -4,7 +4,6 @@
   tasks:
    - include_vars:
        dir: vars
-   - include: tasks/base.yml
    - include: tasks/buster.yml
    - include: tasks/git.yml
    - include: tasks/st.yml
