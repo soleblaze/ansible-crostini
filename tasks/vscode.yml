@@ -21,7 +21,7 @@
     repo: deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
     filename: vscode
     state: present
-  when: vscode.stat.exists == True
+  when: vscode.stat.exists == False
 
 - name: Install Visual Studio Code - Insiders
   apt:
