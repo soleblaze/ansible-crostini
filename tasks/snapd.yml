@@ -6,3 +6,14 @@
     - fuse
     - squashfuse
     - snapd
+
+- name: Install journey
+  snap:
+    name: journey
+
+- name: Copy journey desktop file
+  copy:
+    src: files/journey.desktop
+    dest: /usr/share/applications/journey.desktop
+    owner: root
+    group: root
