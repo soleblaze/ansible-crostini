@@ -7,9 +7,9 @@
     - squashfuse
     - snapd
 
-- name: Install journey
+- name: Install snap core
   snap:
-    name: journey
+    name: core
 
 - name: Copy journey desktop file
   copy:
