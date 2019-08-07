@@ -2,6 +2,6 @@
 [Desktop Entry]
 Type=Application
 Name=Burp Suite Community Edition
-Exec="sommelier -X /usr/local/burpsuite/BurpSuiteCommunity"
+Exec=/usr/local/burpsuite/BurpSuiteCommunity
 Icon=/usr/local/burpsuite/.install4j/BurpSuiteCommunity.png
 Categories=Application;

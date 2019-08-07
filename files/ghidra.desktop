@@ -2,6 +2,7 @@
 [Desktop Entry]
 Type=Application
 Name=Ghidra
-Exec="sommelier -X /opt/ghidra/current/ghidraRun"
+Exec=/opt/ghidra/current/ghidraRun
 Icon=/opt/ghidra/current/support/ghidra.ico
 Categories=Application;
+Terminal=false
