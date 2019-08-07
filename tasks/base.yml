@@ -49,3 +49,29 @@
     owner: "{{ lookup('env','USER') }}"
     group: "{{ lookup('env','USER') }}"
     mode: '0600'
+
+# This doesn't currently appear to work correctly, but I'm keeping it here
+# in case that changes in the future
+- name: Configure sommelier
+  copy:
+    src: files/sommelierrc
+    dest: /home/{{ lookup('env','USER') }}/.sommelierrc
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: '0600'
+
+- name: Create cros-garcon systemd config directory
+  file:
+    path: /home/{{ lookup('env','USER') }}/.config/systemd/user/cros-garcon.service.d
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: '0750'
+    state: directory
+
+- name: Configure cros-garcon via systemd
+  copy:
+    src: files/cros-garcon-override.conf
+    dest: /home/{{ lookup('env','USER') }}/.config/systemd/user/cros-garcon.service.d/cros-garcon-override.conf
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: '0640'
