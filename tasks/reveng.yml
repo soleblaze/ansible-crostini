@@ -249,3 +249,7 @@
     dest: /usr/share/applications/ghidra.desktop
     owner: root
     group: root
+
+- name: Install hopper
+  apt:
+    deb: https://d2ap6ypl1xbe4k.cloudfront.net/Hopper-v4-4.5.13-Linux.deb
