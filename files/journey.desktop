@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Journey
 Comment=Keep your private memories forever.
-Exec=/snap/bin/journey
+Exec=sommelier -X /snap/bin/journey
 Terminal=false
 Type=Application
 Icon=/snap/journey/current/meta/gui/icon.png
