@@ -2,6 +2,7 @@
   stat:
     path: /usr/local/bin/st
   register: app
+
 - name: Download and extract st
   unarchive:
     src: https://dl.suckless.org/st/st-{{ st['version'] }}.tar.gz
@@ -77,4 +78,3 @@
     dest: /usr/share/applications/debian-st.desktop
     owner: root
     group: root
-
