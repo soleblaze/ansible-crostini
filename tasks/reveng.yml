@@ -100,7 +100,6 @@
     group: "{{ lookup('env','USER') }}"
     mode: '0755'
 
-
 - name: Compile Keystone Engine
   command: ../make-share.sh
   args:
@@ -201,3 +200,29 @@
     state: link
   become_user: "{{ lookup('env','USER') }}"
 
+- name: Create ghidra directory
+  file:
+    path: /opt/ghidra
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Install ghidra
+  unarchive:
+    src: https://ghidra-sre.org/ghidra_9.0.4_PUBLIC_20190516.zip
+    dest: /opt/ghidra
+    remote_src: yes
+
+- name: Create current link to ghidra
+  file:
+    src: /opt/ghidra/ghidra_9.0.4
+    dest: /opt/ghidra/current
+    state: link
+
+- name: Copy ghidra desktop file
+  copy:
+    src: files/ghidra.desktop
+    dest: /usr/share/applications/ghidra.desktop
+    owner: root
+    group: root

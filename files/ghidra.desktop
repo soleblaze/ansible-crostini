@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=Ghidra
+Exec="sommelier -X /opt/ghidra/current/ghidraRun"
+Icon=/opt/ghidra/current/support/ghidra.ico
+Categories=Application;
