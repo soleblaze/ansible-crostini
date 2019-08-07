@@ -200,6 +200,29 @@
     state: link
   become_user: "{{ lookup('env','USER') }}"
 
+- name: Check if burp suite is installed
+  stat:
+    path: /usr/local/burpsuite/BurpSuiteCommunity
+  register: burp
+
+- name: Download burp suite
+  get_url:
+    url: https://portswigger.net/burp/releases/download?product=community&version=2.1.02&type=linux
+    dest: /tmp/burp.sh
+    mode: '0755'
+  when: burp.stat.exists == false
+
+- name: Install burp suite
+  script: /tmp/burp.sh -q -dir /usr/local/burpsuite -overwrite
+  when: burp.stat.exists == false
+
+- name: Copy burp suite desktop file
+  copy:
+    src: files/Burp Suite Community Edition.desktop
+    dest: /usr/share/applications/Burp Suite Community Edition.desktop
+    owner: root
+    group: root
+
 - name: Create ghidra directory
   file:
     path: /opt/ghidra
