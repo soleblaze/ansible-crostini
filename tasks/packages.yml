@@ -20,10 +20,13 @@
     - dnsutils
     - jq
     - gawk
+    - geeqie
     - git-crypt
     - libnotify-bin
     - netcat
     - nmap
+    - openjdk-11-jdk
+    - openjdk-11-jre
     - silversearcher-ag
     - strace
     - xsel
