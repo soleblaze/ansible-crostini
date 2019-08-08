@@ -14,6 +14,5 @@
    - include: tasks/docker.yml
    - include: tasks/vscode.yml
    - include: tasks/golang.yml
-   - include: tasks/snapd.yml
    - include: tasks/weechat.yml
    - include: tasks/reveng.yml
