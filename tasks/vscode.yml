@@ -27,3 +27,10 @@
   apt:
     name: code-insiders
     state: present
+
+- name: Copy vscode desktop file
+  copy:
+    src: files/code-insiders.desktop
+    dest: /usr/share/applications/code-insiders.desktop
+    owner: root
+    group: root
