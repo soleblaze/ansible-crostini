@@ -1,0 +1,34 @@
+- name: Install python
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - python-dev
+    - python-pip
+    - python3-dev
+    - python3-pip
+
+- name: Install autopep8
+  pip:
+    name: autopep8
+    executable: pip3
+
+- name: Install bandit
+  pip:
+    name: bandit
+    executable: pip3
+
+- name: Install pylint
+  pip:
+    name: pylint
+    executable: pip3
+
+- name: Install pytest
+  pip:
+    name: pytest
+    executable: pip3
+
+- name: Install tox
+  pip:
+    name: tox
+    executable: pip3
