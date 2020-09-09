@@ -16,28 +16,32 @@
     dest: /tmp/st-{{ st['version'] }}/config.h
   when: app.stat.exists == false
 
-- name: Download st patch - {{ patch }}
+- name: Download st patch - bold is not bright
   get_url:
-    url: https://raw.githubusercontent.com/soleblaze/dotfiles/master/st/{{ patch }}.diff
-    dest: /tmp/st-{{ st['version'] }}/{{ patch }}.diff
-  vars:
-    patch: st-anysize-0.8.1
+    url: https://st.suckless.org/patches/bold-is-not-bright/st-bold-is-not-bright-20190127-3be4cf1.diff
+    dest: /tmp/st-{{ st['version'] }}/boldisnotbright.diff
+    mode: '0744'
   when: app.stat.exists == false
 
-- name: Download st patch - {{ patch }}
-  get_url:
-    url: https://raw.githubusercontent.com/soleblaze/dotfiles/master/st/{{ patch }}.diff
-    dest: /tmp/st-{{ st['version'] }}/{{ patch }}.diff
-  vars:
-    patch: st-bold-is-not-bright-20190127-3be4cf1
+- name: Apply st patch - bold is not bright
+  patch:
+    src: /tmp/st-{{ st['version'] }}/boldisnotbright.diff
+    basedir: /tmp/st-{{ st['version'] }}
+    strip: 1
   when: app.stat.exists == false
 
-- name: Download st patch - {{ patch }}
+- name: Download st patch - boxdraw
   get_url:
-    url: https://raw.githubusercontent.com/soleblaze/dotfiles/master/st/{{ patch }}.diff
-    dest: /tmp/st-{{ st['version'] }}/{{ patch }}.diff
-  vars:
-    patch: st-boxdraw-20190202-3be4cf1
+    url: https://st.suckless.org/patches/boxdraw/st-boxdraw_v2-0.8.3.diff
+    dest: /tmp/st-{{ st['version'] }}/boxdraw.diff
+    mode: '0744'
+  when: app.stat.exists == false
+
+- name: Apply st patch - boxdraw
+  patch:
+    src: /tmp/st-{{ st['version'] }}/boxdraw.diff
+    basedir: /tmp/st-{{ st['version'] }}
+    strip: 1
   when: app.stat.exists == false
 
 - name: Install packages needed to compile st
@@ -59,8 +63,9 @@
 
 - name: Download DejaVu Sans Mono Nerd Font
   get_url:
-    url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
-    dest: /usr/local/share/fonts/DejaVu Sans Mono Nerd Font Complete Mono.ttf
+    url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf
+    dest: /usr/local/share/fonts/DejaVu Sans Mono Nerd Font Complete.ttf
+    mode: '0644'
   register: font
 
 - name: Refresh font cache
@@ -71,6 +76,7 @@
   get_url:
     url: http://icons.iconarchive.com/icons/kxmylo/simple/512/utilities-terminal-icon.png
     dest: /usr/share/icons/hicolor/48x48/apps/term-icon.png
+    mode: '0644'
 
 - name: Copy st desktop file
   copy:
@@ -78,3 +84,4 @@
     dest: /usr/share/applications/debian-st.desktop
     owner: root
     group: root
+    mode: '0644'

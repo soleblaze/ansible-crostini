@@ -21,35 +21,6 @@
     group: root
     mode: 0644
 
-- name: Enable sshd on start
-  file:
-    path: /etc/ssh/sshd_not_to_be_run
-    state: absent
-
-- name: Create ssh directory
-  file:
-    path: /home/{{ lookup('env','USER') }}/.ssh
-    state: directory
-    owner: "{{ lookup('env','USER') }}"
-    group: "{{ lookup('env','USER') }}"
-    mode: '0700'
-
-- name: Create ssh directory
-  file:
-    path: /home/{{ lookup('env','USER') }}/.ssh
-    state: directory
-    owner: "{{ lookup('env','USER') }}"
-    group: "{{ lookup('env','USER') }}"
-    mode: '0700'
-
-- name: Setup SSH authorization_keys file
-  copy:
-    src: files/authorized_keys
-    dest: /home/{{ lookup('env','USER') }}/.ssh/authorized_keys
-    owner: "{{ lookup('env','USER') }}"
-    group: "{{ lookup('env','USER') }}"
-    mode: '0600'
-
 # This doesn't currently appear to work correctly, but I'm keeping it here
 # in case that changes in the future
 - name: Configure sommelier
