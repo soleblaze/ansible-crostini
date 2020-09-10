@@ -6,7 +6,9 @@
     - apt-file
     - cros-gpu
     - dnsutils
+    - exa
     - exuberant-ctags
+    - fd-find
     - jq
     - gawk
     - geeqie
@@ -18,6 +20,7 @@
     - openjdk-11-jre
     - silversearcher-ag
     - strace
+    - tldr
     - xsel
     - zeal
 
