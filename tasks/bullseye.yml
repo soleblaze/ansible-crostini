@@ -1,0 +1,23 @@
+- name: Update crostini from buster to bullseye
+  replace:
+    dest: /etc/apt/sources.list
+    regexp: 'buster/updates'
+    replace: 'bullseye-security'
+  register: bullseye
+
+- name: Update crostini from buster to bullseye
+  replace:
+    dest: /etc/apt/sources.list
+    regexp: 'buster'
+    replace: 'bullseye'
+
+# Fixes an issue where libgcc-8-dev prevents dist-upgrade
+- name: Install gcc-8-base
+  apt:
+    name: gcc-8-base
+
+- name: Update all packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+  when: bullseye.changed

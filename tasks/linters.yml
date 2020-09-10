@@ -1,0 +1,41 @@
+---
+- name: Install gitlint
+  pip:
+    name: gitlint
+    executable: pip3
+
+- name: Install ansible lint
+  pip:
+    name: ansible-lint
+    executable: pip3
+
+- name: Install yamllint
+  pip:
+    name: yamllint
+    executable: pip3
+
+- name: Install fixjson
+  yarn:
+    name: fixjson
+    global: "yes"
+  changed_when: false
+
+- name: Install prettier
+  yarn:
+    name: prettier
+    global: "yes"
+  changed_when: false
+
+- name: Install write-good
+  yarn:
+    name: write-good
+    global: "yes"
+  changed_when: false
+
+- name: Install markdownlinter
+  gem:
+    name: mdl
+
+- name: Install shellcheck
+  apt:
+    name: shellcheck

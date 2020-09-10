@@ -1,0 +1,26 @@
+---
+- name: Install nodesource gpg key
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
+
+- name: Install nodejs 13_x repo
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/node_13.x focal main"
+
+- name: Install nodejs
+  apt:
+    name: nodejs
+
+- name: Install yarnpkg gpg key
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    state: present
+
+- name: Install yarnpkg repo
+  apt_repository:
+    repo: "deb https://dl.yarnpkg.com/debian/ stable main"
+
+- name: Install yarn
+  apt:
+    name: yarn

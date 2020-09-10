@@ -2,5 +2,6 @@
   become: true
 
   tasks:
+   - include: tasks/bullseye.yml
    - include: tasks/base.yml
    - include: tasks/ansible.yml

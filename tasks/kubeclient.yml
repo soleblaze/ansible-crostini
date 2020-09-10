@@ -1,0 +1,56 @@
+---
+- name: Install kubectl
+  get_url:
+    url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubectl_version }}/bin/linux/amd64/kubectl"
+    dest: /usr/local/bin/kubectl
+    mode: '755'
+    owner: 'root'
+    group: 'root'
+
+- name: Install baltocdn.com key
+  apt_key:
+    url: https://baltocdn.com/helm/signing.asc
+    state: present
+
+- name: Setup helm repo
+  apt_repository:
+    repo: deb https://baltocdn.com/helm/stable/debian/ all main
+    state: present
+
+- name: Install helm
+  apt:
+    name: helm
+
+- name: Install fluxctl
+  get_url:
+    url: https://github.com/fluxcd/flux/releases/download/{{ fluxctl_version }}/fluxctl_linux_amd64
+    dest: /usr/local/bin/fluxctl
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Install kubeseal
+  get_url:
+    url: https://github.com/bitnami-labs/sealed-secrets/releases/download/{{ kubeseal_version }}/kubeseal-linux-amd64
+    dest: /usr/local/bin/kubeseal
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Install istioctl
+  unarchive:
+    src: https://github.com/istio/istio/releases/download/{{ istio_version }}/istio-{{ istio_version }}-linux-amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Install kube-prompt
+  unarchive:
+    src: https://github.com/c-bata/kube-prompt/releases/download/{{ kubeprompt_version }}/kube-prompt_{{ kubeprompt_version }}_linux_amd64.zip
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Install popeye
+  unarchive:
+    src: https://github.com/derailed/popeye/releases/download/{{ popeye_version }}/popeye_Linux_x86_64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes

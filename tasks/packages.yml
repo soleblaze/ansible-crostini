@@ -1,17 +1,10 @@
-- name: Install nodejs
-  apt:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - nodejs
-    - npm
-
 - name: Install generic tools
   apt:
     name: "{{ packages }}"
   vars:
     packages:
     - apt-file
+    - cros-gpu
     - dnsutils
     - exuberant-ctags
     - jq
@@ -26,17 +19,40 @@
     - silversearcher-ag
     - strace
     - xsel
+    - zeal
 
-- name: Install zeal
-  apt:
-    name: zeal
-    state: present
-
-- name: Install cros-gpu
-  apt:
-    name: cros-gpu
-    state: present
+- name: Install yq
+  get_url:
+    url: https://github.com/mikefarah/yq/releases/download/3.2.3/yq_linux_amd64
+    dest: /usr/local/bin/yq
+    mode: '0555'
+    owner: 'root'
+    group: 'root'
 
 - name: Install pet
   apt:
     deb: https://github.com/knqyf263/pet/releases/download/v0.3.6/pet_0.3.6_linux_amd64.deb
+
+- name: Install bat for x86_64
+  apt:
+    deb: https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb
+  register: bat
+
+- name: Update bat cache
+  command: bat cache --build
+  when: bat.changed
+
+- name: Install prettyping for x86_64
+  apt:
+    name: prettyping
+
+- name: Install delta on x86_64
+  apt:
+    deb: https://github.com/dandavison/delta/releases/download/0.1.1/git-delta_0.1.1_amd64.deb
+
+- name: Install cobalt2 theme for bat/delta
+  git:
+    repo: https://github.com/wesbos/cobalt2.git
+    dest: /home/{{ lookup('env','USER') }}/.config/bat/themes/cobalt2
+    update: no
+  become_user: "{{ lookup('env','USER') }}"

@@ -7,11 +7,14 @@
    - include: tasks/git.yml
    - include: tasks/st.yml
    - include: tasks/zsh.yml
+   - include: tasks/packages.yml
    - include: tasks/neovim.yml
    - include: tasks/tmux.yml
-   - include: tasks/packages.yml
    - include: tasks/docker.yml
    - include: tasks/vscode.yml
    - include: tasks/golang.yml
    - include: tasks/python.yml
+   - include: tasks/nodejs.yml
+   - include: tasks/linters.yml
+   - include: tasks/kubeclient.yml
    - include: tasks/weechat.yml

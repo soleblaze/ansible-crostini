@@ -19,29 +19,18 @@
   fsckobjects = true
 [diff]
   tool = icdiff
+  guitool = meld
 [difftool]
   prompt = false
 [difftool "icdiff"]
   cmd = icdiff --line-numbers $LOCAL $REMOTE
-[color "diff-highlight"]
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
-  oldNormal = red bold
 [core]
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta --theme="cobalt2"
+[interactive]
+  diffFilter = delta --color-only --theme="cobalt2"
 [http "https://gopkg.in"]
   followRedirects = true
-[color "diff"]
-  frag = magenta bold
-  commit = yellow bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
-  meta = yellow
 [mergetool "nvim"]
   cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool]
   prompt = false
-[init]
-  templatedir = /home/{{ lookup('env','USER') }}/git/dotfiles/git-hooks
